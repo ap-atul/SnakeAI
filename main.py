@@ -1,9 +1,26 @@
 import curses
+import sys
 
+from astar import AStar
 from components import *
 
 
+class StdOutWrapper:
+    text = ""
+
+    def write(self, txt):
+        self.text += txt
+        self.text += "\n"
+
+    def get_text(self):
+        return self.text
+
+
 def startGame():
+    mystdout = StdOutWrapper()
+    sys.stdout = mystdout
+    sys.stderr = mystdout
+
     curses.initscr()
     curses.beep()
     curses.beep()
@@ -16,6 +33,7 @@ def startGame():
 
     snake = Snake(SNAKE_X, SNAKE_Y, window)
     food = Food(window)
+    astar = AStar()
 
     while True:
         window.clear()
@@ -31,17 +49,25 @@ def startGame():
         if event == 27:
             break
 
-        if event in (KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT):
-            snake.makeMove(event)
-
         if snake.head.x == food.x and snake.head.y == food.y:
             snake.eatFood(food)
+
+        event = astar.getKey(food, snake)
+        # print(event)
+
+        if event in (KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT):
+            snake.makeMove(event)
 
         snake.update()
         if snake.collided():
             break
 
     curses.endwin()
+    print(f"High score :: {snake.score}")
+
+    sys.stdout = sys.__stdout__
+    sys.stderr = sys.__stderr__
+    sys.stdout.write(mystdout.get_text())
 
 
 if __name__ == "__main__":

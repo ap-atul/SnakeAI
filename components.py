@@ -17,8 +17,8 @@ class Body(object):
 
 class Food(object):
     def __init__(self, window, char=FOOD_CHAR):
-        self.x = randint(1, MAX_X)
-        self.y = randint(1, MAX_Y)
+        self.x = randint(10, MAX_X)
+        self.y = randint(10, MAX_Y)
         self.char = char
         self.window = window
 
@@ -26,8 +26,8 @@ class Food(object):
         self.window.addstr(self.y, self.x, self.char)
 
     def reset(self):
-        self.x = randint(1, MAX_X)
-        self.y = randint(1, MAX_Y)
+        self.x = randint(10, MAX_X)
+        self.y = randint(10, MAX_Y)
 
 
 class Snake(object):
