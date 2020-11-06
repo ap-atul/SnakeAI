@@ -26,3 +26,7 @@ $ pip install curses
 ```
 $ python main.py
 ```
+
+## Screen
+
+![screen](https://github.com/AP-Atul/SnakeAI/blob/master/img/snake.png)
