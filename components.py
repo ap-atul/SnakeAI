@@ -16,11 +16,12 @@ class Body(object):
 
 
 class Food(object):
-    def __init__(self, window, char=FOOD_CHAR):
+    def __init__(self, window, snake, char=FOOD_CHAR):
         self.x = randint(10, MAX_X - 10)
         self.y = randint(10, MAX_Y - 10)
         self.char = char
         self.window = window
+        self.snake = snake
 
     def render(self):
         self.window.addstr(self.y, self.x, self.char)
@@ -28,6 +29,12 @@ class Food(object):
     def reset(self):
         self.x = randint(10, MAX_X - 10)
         self.y = randint(10, MAX_Y - 10)
+
+        if self.collides():
+            self.reset()
+
+    def collides(self):
+        return any([body.position == (self.x, self.y) for body in self.snake.body[: -1]])
 
 
 class Snake(object):
