@@ -17,8 +17,8 @@ class Body(object):
 
 class Food(object):
     def __init__(self, window, char=FOOD_CHAR):
-        self.x = randint(10, MAX_X)
-        self.y = randint(10, MAX_Y)
+        self.x = randint(10, MAX_X - 10)
+        self.y = randint(10, MAX_Y - 10)
         self.char = char
         self.window = window
 
@@ -26,8 +26,8 @@ class Food(object):
         self.window.addstr(self.y, self.x, self.char)
 
     def reset(self):
-        self.x = randint(10, MAX_X)
-        self.y = randint(10, MAX_Y)
+        self.x = randint(10, MAX_X - 10)
+        self.y = randint(10, MAX_Y - 10)
 
 
 class Snake(object):
@@ -70,7 +70,8 @@ class Snake(object):
         self.score += 1
 
         if self.score % 3 == 0:
-            self.timeout -= 5
+            if self.timeout > 20:
+                self.timeout -= 5
             self.window.timeout(self.timeout)
 
     @property

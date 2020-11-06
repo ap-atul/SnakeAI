@@ -16,15 +16,19 @@ class AStar:
             KEY_RIGHT: KEY_LEFT
         }
 
-    def getMoves(self, direction):
-        paths = self.paths.copy()
-        paths.remove(direction)
-        return paths
+        self.moves = 0
 
-    def getDistances(self, paths, goal, current):
+    def sortDictionary(self, x):
+        return {k: v for k, v in sorted(x.items(), key=lambda item: item[1])}
+
+    def collides(self, headPosition, snake):
+        return any([body.position == headPosition for body in snake.body[: -1]])
+
+    def getDistances(self, goal, current, snake):
         distances = dict()
+        self.moves += 1
 
-        for path in paths:
+        for path in self.paths:
             x = None
             y = None
             goal_x = goal.x
@@ -46,21 +50,20 @@ class AStar:
                 x = current.x - 1
                 y = current.y
 
-            distances[path] = abs(x - goal_x) + abs(y - goal_y)
+            if self.collides((x, y), snake):
+                continue
+
+            distances[path] = self.moves + abs(x - goal_x) + abs(y - goal_y)
 
         return distances
 
-    def sortDictionary(self, x):
-        return {k: v for k, v in sorted(x.items(), key=lambda item: item[1])}
-
     def getKey(self, food, snake):
         if snake.head.x == food.x and snake.head.y:
+            self.moves = 0
             return snake.direction
 
-        currentDirection = snake.direction
-        availablePaths = self.getMoves(currentDirection)
-
-        distances = self.getDistances(availablePaths, food, snake.head)
+        distances = self.getDistances(food, snake.head, snake)
         distances = self.sortDictionary(distances)
+        distances = list(distances.keys())
 
-        return list(distances.keys())[0]
+        return distances[0]
