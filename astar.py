@@ -4,6 +4,11 @@ from components import *
 
 
 class AStar:
+    """
+     A star algorithm implementation
+     f(n) = g(n) + h(n)
+     """
+
     def __init__(self):
         self.paths = [
             KEY_RIGHT,
@@ -21,9 +26,11 @@ class AStar:
         self.moves = 0
 
     def collides(self, headPosition, snake):
+        """ Check for body collision on the next step """
         return any([body.position == headPosition for body in snake.body[: -1]])
 
     def getDistances(self, goal, current, snake):
+        """ Finding distance for each path """
         distances = PriorityQueue()
         self.moves += 1
 
@@ -58,6 +65,7 @@ class AStar:
         return distances
 
     def getKey(self, food, snake):
+        """ Returns the next step """
         if snake.head.x == food.x and snake.head.y:
             self.moves = 0
             return snake.direction

@@ -6,6 +6,7 @@ from components import *
 
 
 class StdOutWrapper:
+    """ Helper to print on terminal """
     text = ""
 
     def write(self, txt):
@@ -32,7 +33,7 @@ def startGame():
     window.border(0)
 
     snake = Snake(SNAKE_X, SNAKE_Y, window)
-    food = Food(window)
+    food = Food(window, snake)
     astar = AStar()
 
     while True:

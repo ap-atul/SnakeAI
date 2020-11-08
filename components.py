@@ -5,6 +5,7 @@ from constant import *
 
 
 class Body(object):
+    """ Each body has a x & y """
     def __init__(self, x, y, char=BODY_CHAR):
         self.x = x
         self.y = y
@@ -16,6 +17,7 @@ class Body(object):
 
 
 class Food(object):
+    """ Food with random location """
     def __init__(self, window, snake, char=FOOD_CHAR):
         self.x = randint(10, MAX_X - 10)
         self.y = randint(10, MAX_Y - 10)
@@ -38,6 +40,7 @@ class Food(object):
 
 
 class Snake(object):
+    """ Snake with multiple body """
     def __init__(self, x, y, window):
         self.window = window
         self.body = list()
