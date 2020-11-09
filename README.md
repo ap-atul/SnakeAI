@@ -29,4 +29,4 @@ $ python main.py
 
 ## Screen
 
-![screen](https://github.com/AP-Atul/SnakeAI/blob/master/img/snake.png)
+![screen](https://raw.githubusercontent.com/AP-Atul/SnakeAI/main/img/snake.png)
