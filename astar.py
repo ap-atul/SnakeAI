@@ -59,8 +59,12 @@ class AStar:
             if self.collides((x, y), snake):
                 continue
 
-            distances.put((self.moves + abs(x - goal_x) + abs(y - goal_y),
-                           path))
+            gn = self.moves
+            hn = abs(x - goal_x) + abs(y - goal_y)
+            fn = gn + hn
+
+            # add to queue
+            distances.put((fn, path))
 
         return distances
 

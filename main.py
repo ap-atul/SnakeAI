@@ -52,6 +52,7 @@ def startGame():
 
         if snake.head.x == food.x and snake.head.y == food.y:
             snake.eatFood(food)
+            curses.beep()
 
         event = astar.getKey(food, snake)
         # print(event)

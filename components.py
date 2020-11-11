@@ -19,8 +19,8 @@ class Body(object):
 class Food(object):
     """ Food with random location """
     def __init__(self, window, snake, char=FOOD_CHAR):
-        self.x = randint(10, MAX_X - 10)
-        self.y = randint(10, MAX_Y - 10)
+        self.x = randint(10, MAX_X)
+        self.y = randint(10, MAX_Y)
         self.char = char
         self.window = window
         self.snake = snake
@@ -29,8 +29,8 @@ class Food(object):
         self.window.addstr(self.y, self.x, self.char)
 
     def reset(self):
-        self.x = randint(10, MAX_X - 10)
-        self.y = randint(10, MAX_Y - 10)
+        self.x = randint(10, MAX_X)
+        self.y = randint(10, MAX_Y)
 
         if self.collides():
             self.reset()
