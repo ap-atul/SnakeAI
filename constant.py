@@ -7,5 +7,5 @@ SNAKE_LEN = 5
 SNAKE_X = SNAKE_LEN + 1
 SNAKE_Y = 3
 BODY_CHAR = "~"
-HEAD_CHAR = "🐷"
-FOOD_CHAR = "🍔"
+HEAD_CHAR = "%"
+FOOD_CHAR = "@"
